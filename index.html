@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,7 +23,7 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
-    .logo {
+    .logo-btn {
       width: 80px;
       height: 80px;
       background: #888;
@@ -34,8 +35,15 @@
       transition: background 0.2s;
       color: #fff;
       font-size: 0.75rem;
+      border: none;
+      outline: none;
+      margin: 0;
+      padding: 0;
+      user-select: none;
     }
-    .logo:hover { background: #555; }
+    .logo-btn:focus-visible,
+    .logo-btn:hover { background: #555; }
+    .logo-btn[aria-expanded="true"] { box-shadow: 0 0 0 2px #3336; }
     .description {
       display: none;
       background: #888;
@@ -45,7 +53,9 @@
       width: 90%;
       max-width: 500px;
       border-radius: 8px;
+      text-align: left;
     }
+    .description.active { display: block; }
     footer {
       margin-top: 3rem;
       padding-top: 1rem;
@@ -55,92 +65,134 @@
     }
   </style>
   <script>
+    // Dynamically manages showing/hiding descriptions for keyboard and mouse
     function toggleDesc(id) {
-      // hide all
-      document.querySelectorAll('.description').forEach(d => {
-        if (d.id === id) {
-          // toggle this one
-          d.style.display = d.style.display === 'block' ? 'none' : 'block';
-        } else {
-          d.style.display = 'none';
+      const descriptions = document.querySelectorAll('.description');
+      const buttons = document.querySelectorAll('.logo-btn');
+      descriptions.forEach(d => d.classList.remove('active'));
+      buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+      const desc = document.getElementById(id);
+      const btn = document.querySelector('.logo-btn[data-desc="' + id + '"]');
+      if (desc && btn) {
+        // Toggle only if not already visible
+        if (!desc.classList.contains('active')) {
+          desc.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+          // Scroll to description if off screen
+          desc.scrollIntoView({ behavior: "smooth", block: "center" });
         }
-      });
+      }
     }
+
+    // Close all descriptions on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") {
+        document.querySelectorAll('.description').forEach(d => d.classList.remove('active'));
+        document.querySelectorAll('.logo-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+      }
+    });
   </script>
 </head>
 <body>
-  <h1 class="main-title">Our Partnerships</h1>
-  <p class="subtitle">Click each partner logo below to learn more about our accreditations and preferred relationships.</p>
+  <header>
+    <h1 class="main-title">Our Partnerships</h1>
+    <p class="subtitle">Click or tab to a partner logo below to learn more about our accreditations and preferred relationships.</p>
+  </header>
 
-  <!-- Accreditation Section -->
-  <h2 class="section-title">Our Accreditations and Industry Memberships</h2>
-  <div class="grid">
-    <div class="logo" onclick="toggleDesc('acc1')">CLIA Soon</div>
-    <div class="logo" onclick="toggleDesc('acc2')">TRUE Soon</div>
-    <div class="logo" onclick="toggleDesc('acc3')">ARC Soon</div>
-    <div class="logo" onclick="toggleDesc('acc4')">IATAN Soon</div>
-  </div>
-  <div id="acc1" class="description">Info Coming Soon</div>
-  <div id="acc2" class="description">Info Coming Soon</div>
-  <div id="acc3" class="description">Info Coming Soon</div>
-  <div id="acc4" class="description">Info Coming Soon</div>
-
-  <!-- Cruise Section (8) -->
-  <h2 class="section-title">Our Cruise Line Preferred Partners</h2>
-  <div class="grid">
-    <div class="logo" onclick="toggleDesc('c1')">Silversea Soon</div>
-    <div class="logo" onclick="toggleDesc('c2')">Regent Soon</div>
-    <div class="logo" onclick="toggleDesc('c3')">Crystal Soon</div>
-    <div class="logo" onclick="toggleDesc('c4')">Azamara Soon</div>
-    <div class="logo" onclick="toggleDesc('c5')">Viking Soon</div>
-    <div class="logo" onclick="toggleDesc('c6')">Seabourn Soon</div>
-    <div class="logo" onclick="toggleDesc('c7')">Holland America Soon</div>
-    <div class="logo" onclick="toggleDesc('c8')">Princess Soon</div>
-  </div>
-  <div id="c1" class="description">Info Coming Soon</div>
-  <div id="c2" class="description">Info Coming Soon</div>
-  <div id="c3" class="description">Info Coming Soon</div>
-  <div id="c4" class="description">Info Coming Soon</div>
-  <div id="c5" class="description">Info Coming Soon</div>
-  <div id="c6" class="description">Info Coming Soon</div>
-  <div id="c7" class="description">Info Coming Soon</div>
-  <div id="c8" class="description">Info Coming Soon</div>
-
-  <!-- Cruise Section (additional 7) -->
-  <div class="grid">
-    <div class="logo" onclick="toggleDesc('c9')">Disney Soon</div>
-    <div class="logo" onclick="toggleDesc('c10')">Virgin Soon</div>
-    <div class="logo" onclick="toggleDesc('c11')">MSC Soon</div>
-    <div class="logo" onclick="toggleDesc('c12')">Celebrity Soon</div>
-    <div class="logo" onclick="toggleDesc('c13')">Royal Soon</div>
-    <div class="logo" onclick="toggleDesc('c14')">Ama Soon</div>
-    <div class="logo" onclick="toggleDesc('c15')">Cunard Soon</div>
-  </div>
-  <div id="c9"  class="description">Info Coming Soon</div>
-  <div id="c10" class="description">Info Coming Soon</div>
-  <div id="c11" class="description">Info Coming Soon</div>
-  <div id="c12" class="description">Info Coming Soon</div>
-  <div id="c13" class="description">Info Coming Soon</div>
-  <div id="c14" class="description">Info Coming Soon</div>
-  <div id="c15" class="description">Info Coming Soon</div>
-
-  <!-- Hotel Section -->
-  <h2 class="section-title">Our Hotel Brand Preferred Partners</h2>
-  <div class="grid">
-    <div class="logo" onclick="toggleDesc('h1')">Hilton Soon</div>
-    <div class="logo" onclick="toggleDesc('h2')"> Marriott Soon</div>
-    <div class="logo" onclick="toggleDesc('h3')">IHG Soon</div>
-    <div class="logo" onclick="toggleDesc('h4')">Accor Soon</div>
-  </div>
-  <div id="h1" class="description">Info Coming Soon</div>
-  <div id="h2" class="description">Info Coming Soon</div>
-  <div id="h3" class="description">Info Coming Soon</div>
-  <div id="h4" class="description">Info Coming Soon</div>
-
-  <footer class="footer">
-    <p>© 2025 Merle & Michael Travel Services LLC</p>
-      </a>
+  <!-- Helper to render grids and their descriptions -->
+  <section aria-labelledby="acc-title">
+    <h2 id="acc-title" class="section-title">Our Accreditations and Industry Memberships</h2>
+    <div class="grid" role="list">
+      <button class="logo-btn" type="button" data-desc="acc1" aria-expanded="false" aria-controls="acc1"
+        onclick="toggleDesc('acc1')">CLIA Soon</button>
+      <button class="logo-btn" type="button" data-desc="acc2" aria-expanded="false" aria-controls="acc2"
+        onclick="toggleDesc('acc2')">TRUE Soon</button>
+      <button class="logo-btn" type="button" data-desc="acc3" aria-expanded="false" aria-controls="acc3"
+        onclick="toggleDesc('acc3')">ARC Soon</button>
+      <button class="logo-btn" type="button" data-desc="acc4" aria-expanded="false" aria-controls="acc4"
+        onclick="toggleDesc('acc4')">IATAN Soon</button>
     </div>
+    <div id="acc1" class="description" tabindex="-1" role="region" aria-label="CLIA Info">Info Coming Soon</div>
+    <div id="acc2" class="description" tabindex="-1" role="region" aria-label="TRUE Info">Info Coming Soon</div>
+    <div id="acc3" class="description" tabindex="-1" role="region" aria-label="ARC Info">Info Coming Soon</div>
+    <div id="acc4" class="description" tabindex="-1" role="region" aria-label="IATAN Info">Info Coming Soon</div>
+  </section>
+
+  <section aria-labelledby="cruise-title">
+    <h2 id="cruise-title" class="section-title">Our Cruise Line Preferred Partners</h2>
+    <div class="grid" role="list">
+      <button class="logo-btn" type="button" data-desc="c1" aria-expanded="false" aria-controls="c1"
+        onclick="toggleDesc('c1')">Silversea Soon</button>
+      <button class="logo-btn" type="button" data-desc="c2" aria-expanded="false" aria-controls="c2"
+        onclick="toggleDesc('c2')">Regent Soon</button>
+      <button class="logo-btn" type="button" data-desc="c3" aria-expanded="false" aria-controls="c3"
+        onclick="toggleDesc('c3')">Crystal Soon</button>
+      <button class="logo-btn" type="button" data-desc="c4" aria-expanded="false" aria-controls="c4"
+        onclick="toggleDesc('c4')">Azamara Soon</button>
+      <button class="logo-btn" type="button" data-desc="c5" aria-expanded="false" aria-controls="c5"
+        onclick="toggleDesc('c5')">Viking Soon</button>
+      <button class="logo-btn" type="button" data-desc="c6" aria-expanded="false" aria-controls="c6"
+        onclick="toggleDesc('c6')">Seabourn Soon</button>
+      <button class="logo-btn" type="button" data-desc="c7" aria-expanded="false" aria-controls="c7"
+        onclick="toggleDesc('c7')">Holland America Soon</button>
+      <button class="logo-btn" type="button" data-desc="c8" aria-expanded="false" aria-controls="c8"
+        onclick="toggleDesc('c8')">Princess Soon</button>
+    </div>
+    <div class="grid" role="list">
+      <button class="logo-btn" type="button" data-desc="c9" aria-expanded="false" aria-controls="c9"
+        onclick="toggleDesc('c9')">Disney Soon</button>
+      <button class="logo-btn" type="button" data-desc="c10" aria-expanded="false" aria-controls="c10"
+        onclick="toggleDesc('c10')">Virgin Soon</button>
+      <button class="logo-btn" type="button" data-desc="c11" aria-expanded="false" aria-controls="c11"
+        onclick="toggleDesc('c11')">MSC Soon</button>
+      <button class="logo-btn" type="button" data-desc="c12" aria-expanded="false" aria-controls="c12"
+        onclick="toggleDesc('c12')">Celebrity Soon</button>
+      <button class="logo-btn" type="button" data-desc="c13" aria-expanded="false" aria-controls="c13"
+        onclick="toggleDesc('c13')">Royal Soon</button>
+      <button class="logo-btn" type="button" data-desc="c14" aria-expanded="false" aria-controls="c14"
+        onclick="toggleDesc('c14')">Ama Soon</button>
+      <button class="logo-btn" type="button" data-desc="c15" aria-expanded="false" aria-controls="c15"
+        onclick="toggleDesc('c15')">Cunard Soon</button>
+    </div>
+    <!-- Cruise Descriptions -->
+    <div id="c1"  class="description" tabindex="-1" role="region" aria-label="Silversea Info">Info Coming Soon</div>
+    <div id="c2"  class="description" tabindex="-1" role="region" aria-label="Regent Info">Info Coming Soon</div>
+    <div id="c3"  class="description" tabindex="-1" role="region" aria-label="Crystal Info">Info Coming Soon</div>
+    <div id="c4"  class="description" tabindex="-1" role="region" aria-label="Azamara Info">Info Coming Soon</div>
+    <div id="c5"  class="description" tabindex="-1" role="region" aria-label="Viking Info">Info Coming Soon</div>
+    <div id="c6"  class="description" tabindex="-1" role="region" aria-label="Seabourn Info">Info Coming Soon</div>
+    <div id="c7"  class="description" tabindex="-1" role="region" aria-label="Holland America Info">Info Coming Soon</div>
+    <div id="c8"  class="description" tabindex="-1" role="region" aria-label="Princess Info">Info Coming Soon</div>
+    <div id="c9"  class="description" tabindex="-1" role="region" aria-label="Disney Info">Info Coming Soon</div>
+    <div id="c10" class="description" tabindex="-1" role="region" aria-label="Virgin Info">Info Coming Soon</div>
+    <div id="c11" class="description" tabindex="-1" role="region" aria-label="MSC Info">Info Coming Soon</div>
+    <div id="c12" class="description" tabindex="-1" role="region" aria-label="Celebrity Info">Info Coming Soon</div>
+    <div id="c13" class="description" tabindex="-1" role="region" aria-label="Royal Info">Info Coming Soon</div>
+    <div id="c14" class="description" tabindex="-1" role="region" aria-label="Ama Info">Info Coming Soon</div>
+    <div id="c15" class="description" tabindex="-1" role="region" aria-label="Cunard Info">Info Coming Soon</div>
+  </section>
+
+  <section aria-labelledby="hotel-title">
+    <h2 id="hotel-title" class="section-title">Our Hotel Brand Preferred Partners</h2>
+    <div class="grid" role="list">
+      <button class="logo-btn" type="button" data-desc="h1" aria-expanded="false" aria-controls="h1"
+        onclick="toggleDesc('h1')">Hilton Soon</button>
+      <button class="logo-btn" type="button" data-desc="h2" aria-expanded="false" aria-controls="h2"
+        onclick="toggleDesc('h2')">Marriott Soon</button>
+      <button class="logo-btn" type="button" data-desc="h3" aria-expanded="false" aria-controls="h3"
+        onclick="toggleDesc('h3')">IHG Soon</button>
+      <button class="logo-btn" type="button" data-desc="h4" aria-expanded="false" aria-controls="h4"
+        onclick="toggleDesc('h4')">Accor Soon</button>
+    </div>
+    <div id="h1" class="description" tabindex="-1" role="region" aria-label="Hilton Info">Info Coming Soon</div>
+    <div id="h2" class="description" tabindex="-1" role="region" aria-label="Marriott Info">Info Coming Soon</div>
+    <div id="h3" class="description" tabindex="-1" role="region" aria-label="IHG Info">Info Coming Soon</div>
+    <div id="h4" class="description" tabindex="-1" role="region" aria-label="Accor Info">Info Coming Soon</div>
+  </section>
+
+  <footer>
+    <p>© 2025 Merle &amp; Michael Travel Services LLC</p>
   </footer>
 </body>
 </html>
