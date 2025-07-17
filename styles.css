@@ -1,67 +1,93 @@
-
 body {
-  background-color: #0d1117;
-  color: #fff;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f172a;
+  color: #f8fafc;
   margin: 0;
-  padding: 2rem;
+  padding: 40px 20px;
   text-align: center;
 }
+
 .main-title {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
+
 .subtitle {
-  font-size: 1.25rem;
-  color: #ccc;
+  font-size: 1rem;
+  color: #cbd5e1;
   margin-bottom: 2rem;
 }
+
 .section-title {
   font-size: 1.75rem;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  margin: 3rem 0 1rem;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 0.5rem;
 }
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 20px;
   justify-items: center;
   margin-bottom: 2rem;
+  padding: 0 10px;
 }
+
 .logo img {
-  width: 80px;
-  height: 80px;
-  filter: brightness(60%);
+  filter: brightness(0) invert(1);
   transition: filter 0.3s ease;
+  max-width: 80px;
+  height: auto;
+  margin: auto;
+  display: block;
   cursor: pointer;
 }
+
 .logo img:hover {
-  filter: brightness(100%);
+  filter: brightness(1) invert(0.7);
 }
+
 .description {
   display: none;
-  background-color: #161b22;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 0 auto 2rem;
-  max-width: 800px;
-  text-align: left;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+  padding: 0 10px;
 }
-footer {
-  border-top: 1px solid #333;
+
+.description.active {
+  display: block;
+}
+
+footer.footer {
+  border-top: 1px solid #334155;
+  padding-top: 2rem;
   margin-top: 4rem;
-  padding-top: 1rem;
+}
+
+.footer-text {
   font-size: 0.875rem;
-  color: #aaa;
+  color: #64748b;
+  margin-bottom: 1rem;
 }
-.social-icons a {
-  margin: 0 0.5rem;
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
+
 .social-icons img {
-  width: 20px;
-  filter: brightness(70%);
-  transition: filter 0.3s ease;
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  transition: opacity 0.3s;
 }
+
 .social-icons img:hover {
-  filter: brightness(100%);
+  opacity: 1;
 }
