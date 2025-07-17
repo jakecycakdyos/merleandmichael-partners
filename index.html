@@ -4,95 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Partnerships</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 2rem;
-      background: #f5f5f5;
-      color: #333;
-      text-align: center;
-    }
-    .main-title { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .subtitle  { font-size: 1rem; color: #666; margin-bottom: 2rem; }
-    .section-title { font-size: 1.5rem; margin: 3rem 0 1rem; }
-    .grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .logo-btn {
-      width: 80px;
-      height: 80px;
-      background: #888;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-      color: #fff;
-      font-size: 0.75rem;
-      border: none;
-      outline: none;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-    }
-    .logo-btn:focus-visible,
-    .logo-btn:hover { background: #555; }
-    .logo-btn[aria-expanded="true"] { box-shadow: 0 0 0 2px #3336; }
-    .description {
-      display: none;
-      background: #888;
-      color: #fff;
-      padding: 0.75rem;
-      margin: 0.5rem auto 1.5rem;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 8px;
-      text-align: left;
-    }
-    .description.active { display: block; }
-    footer {
-      margin-top: 3rem;
-      padding-top: 1rem;
-      border-top: 1px solid #ddd;
-      font-size: 0.9rem;
-      color: #777;
-    }
-  </style>
-  <script>
-    // Dynamically manages showing/hiding descriptions for keyboard and mouse
-    function toggleDesc(id) {
-      const descriptions = document.querySelectorAll('.description');
-      const buttons = document.querySelectorAll('.logo-btn');
-      descriptions.forEach(d => d.classList.remove('active'));
-      buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
-
-      const desc = document.getElementById(id);
-      const btn = document.querySelector('.logo-btn[data-desc="' + id + '"]');
-      if (desc && btn) {
-        // Toggle only if not already visible
-        if (!desc.classList.contains('active')) {
-          desc.classList.add('active');
-          btn.setAttribute('aria-expanded', 'true');
-          // Scroll to description if off screen
-          desc.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }
-    }
-
-    // Close all descriptions on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === "Escape") {
-        document.querySelectorAll('.description').forEach(d => d.classList.remove('active'));
-        document.querySelectorAll('.logo-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
-      }
-    });
-  </script>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="main.js"></script>
 </head>
 <body>
   <header>
@@ -100,18 +13,21 @@
     <p class="subtitle">Click or tab to a partner logo below to learn more about our accreditations and preferred relationships.</p>
   </header>
 
-  <!-- Helper to render grids and their descriptions -->
   <section aria-labelledby="acc-title">
     <h2 id="acc-title" class="section-title">Our Accreditations and Industry Memberships</h2>
     <div class="grid" role="list">
-      <button class="logo-btn" type="button" data-desc="acc1" aria-expanded="false" aria-controls="acc1"
-        onclick="toggleDesc('acc1')">CLIA Soon</button>
-      <button class="logo-btn" type="button" data-desc="acc2" aria-expanded="false" aria-controls="acc2"
-        onclick="toggleDesc('acc2')">TRUE Soon</button>
-      <button class="logo-btn" type="button" data-desc="acc3" aria-expanded="false" aria-controls="acc3"
-        onclick="toggleDesc('acc3')">ARC Soon</button>
-      <button class="logo-btn" type="button" data-desc="acc4" aria-expanded="false" aria-controls="acc4"
-        onclick="toggleDesc('acc4')">IATAN Soon</button>
+      <button class="logo-btn" type="button" data-desc="acc1" aria-expanded="false" aria-controls="acc1">
+        CLIA Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="acc2" aria-expanded="false" aria-controls="acc2">
+        TRUE Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="acc3" aria-expanded="false" aria-controls="acc3">
+        ARC Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="acc4" aria-expanded="false" aria-controls="acc4">
+        IATAN Soon
+      </button>
     </div>
     <div id="acc1" class="description" tabindex="-1" role="region" aria-label="CLIA Info">Info Coming Soon</div>
     <div id="acc2" class="description" tabindex="-1" role="region" aria-label="TRUE Info">Info Coming Soon</div>
@@ -122,38 +38,53 @@
   <section aria-labelledby="cruise-title">
     <h2 id="cruise-title" class="section-title">Our Cruise Line Preferred Partners</h2>
     <div class="grid" role="list">
-      <button class="logo-btn" type="button" data-desc="c1" aria-expanded="false" aria-controls="c1"
-        onclick="toggleDesc('c1')">Silversea Soon</button>
-      <button class="logo-btn" type="button" data-desc="c2" aria-expanded="false" aria-controls="c2"
-        onclick="toggleDesc('c2')">Regent Soon</button>
-      <button class="logo-btn" type="button" data-desc="c3" aria-expanded="false" aria-controls="c3"
-        onclick="toggleDesc('c3')">Crystal Soon</button>
-      <button class="logo-btn" type="button" data-desc="c4" aria-expanded="false" aria-controls="c4"
-        onclick="toggleDesc('c4')">Azamara Soon</button>
-      <button class="logo-btn" type="button" data-desc="c5" aria-expanded="false" aria-controls="c5"
-        onclick="toggleDesc('c5')">Viking Soon</button>
-      <button class="logo-btn" type="button" data-desc="c6" aria-expanded="false" aria-controls="c6"
-        onclick="toggleDesc('c6')">Seabourn Soon</button>
-      <button class="logo-btn" type="button" data-desc="c7" aria-expanded="false" aria-controls="c7"
-        onclick="toggleDesc('c7')">Holland America Soon</button>
-      <button class="logo-btn" type="button" data-desc="c8" aria-expanded="false" aria-controls="c8"
-        onclick="toggleDesc('c8')">Princess Soon</button>
+      <button class="logo-btn" type="button" data-desc="c1" aria-expanded="false" aria-controls="c1">
+        Silversea Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c2" aria-expanded="false" aria-controls="c2">
+        Regent Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c3" aria-expanded="false" aria-controls="c3">
+        Crystal Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c4" aria-expanded="false" aria-controls="c4">
+        Azamara Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c5" aria-expanded="false" aria-controls="c5">
+        Viking Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c6" aria-expanded="false" aria-controls="c6">
+        Seabourn Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c7" aria-expanded="false" aria-controls="c7">
+        Holland America Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c8" aria-expanded="false" aria-controls="c8">
+        Princess Soon
+      </button>
     </div>
     <div class="grid" role="list">
-      <button class="logo-btn" type="button" data-desc="c9" aria-expanded="false" aria-controls="c9"
-        onclick="toggleDesc('c9')">Disney Soon</button>
-      <button class="logo-btn" type="button" data-desc="c10" aria-expanded="false" aria-controls="c10"
-        onclick="toggleDesc('c10')">Virgin Soon</button>
-      <button class="logo-btn" type="button" data-desc="c11" aria-expanded="false" aria-controls="c11"
-        onclick="toggleDesc('c11')">MSC Soon</button>
-      <button class="logo-btn" type="button" data-desc="c12" aria-expanded="false" aria-controls="c12"
-        onclick="toggleDesc('c12')">Celebrity Soon</button>
-      <button class="logo-btn" type="button" data-desc="c13" aria-expanded="false" aria-controls="c13"
-        onclick="toggleDesc('c13')">Royal Soon</button>
-      <button class="logo-btn" type="button" data-desc="c14" aria-expanded="false" aria-controls="c14"
-        onclick="toggleDesc('c14')">Ama Soon</button>
-      <button class="logo-btn" type="button" data-desc="c15" aria-expanded="false" aria-controls="c15"
-        onclick="toggleDesc('c15')">Cunard Soon</button>
+      <button class="logo-btn" type="button" data-desc="c9" aria-expanded="false" aria-controls="c9">
+        Disney Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c10" aria-expanded="false" aria-controls="c10">
+        Virgin Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c11" aria-expanded="false" aria-controls="c11">
+        MSC Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c12" aria-expanded="false" aria-controls="c12">
+        Celebrity Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c13" aria-expanded="false" aria-controls="c13">
+        Royal Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c14" aria-expanded="false" aria-controls="c14">
+        Ama Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="c15" aria-expanded="false" aria-controls="c15">
+        Cunard Soon
+      </button>
     </div>
     <!-- Cruise Descriptions -->
     <div id="c1"  class="description" tabindex="-1" role="region" aria-label="Silversea Info">Info Coming Soon</div>
@@ -176,14 +107,18 @@
   <section aria-labelledby="hotel-title">
     <h2 id="hotel-title" class="section-title">Our Hotel Brand Preferred Partners</h2>
     <div class="grid" role="list">
-      <button class="logo-btn" type="button" data-desc="h1" aria-expanded="false" aria-controls="h1"
-        onclick="toggleDesc('h1')">Hilton Soon</button>
-      <button class="logo-btn" type="button" data-desc="h2" aria-expanded="false" aria-controls="h2"
-        onclick="toggleDesc('h2')">Marriott Soon</button>
-      <button class="logo-btn" type="button" data-desc="h3" aria-expanded="false" aria-controls="h3"
-        onclick="toggleDesc('h3')">IHG Soon</button>
-      <button class="logo-btn" type="button" data-desc="h4" aria-expanded="false" aria-controls="h4"
-        onclick="toggleDesc('h4')">Accor Soon</button>
+      <button class="logo-btn" type="button" data-desc="h1" aria-expanded="false" aria-controls="h1">
+        Hilton Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="h2" aria-expanded="false" aria-controls="h2">
+        Marriott Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="h3" aria-expanded="false" aria-controls="h3">
+        IHG Soon
+      </button>
+      <button class="logo-btn" type="button" data-desc="h4" aria-expanded="false" aria-controls="h4">
+        Accor Soon
+      </button>
     </div>
     <div id="h1" class="description" tabindex="-1" role="region" aria-label="Hilton Info">Info Coming Soon</div>
     <div id="h2" class="description" tabindex="-1" role="region" aria-label="Marriott Info">Info Coming Soon</div>
